@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barbearia Imperial | Corte, barba e toalha quente — agende pelo WhatsApp</title>
+<meta name="description" content="Barbearia Imperial: corte clássico e degradê, barboterapia com toalha quente e combo cabelo + barba. Horário marcado, sem espera e cerveja gelada por nossa conta. Agende pelo WhatsApp.">
+<meta name="theme-color" content="#121214">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Barbearia Imperial — Mais que um corte, uma experiência de respeito.">
+<meta property="og:description" content="Estilo alinhado, pontualidade e atendimento de primeira. Agende seu horário pelo WhatsApp.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1647140655214-e4a2d914971f?auto=format&amp;fit=crop&amp;w=1200&amp;h=630&amp;q=75">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121214'/%3E%3Cpath d='M7 22 5.5 11.5 11 16l5-8.5L21 16l5.5-4.5L25 22z' fill='%23D4AF37'/%3E%3Crect x='7' y='24' width='18' height='2' rx='1' fill='%23D4AF37'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Hanken+Grotesk:wght@400..800&amp;display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add('js');</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#121214',
+          coal: '#1A1A1E',
+          gold: { DEFAULT: '#D4AF37', soft: '#E5B869' },
+          ivory: '#F2EDE0',
+          smoke: '#A19D92',
+        },
+        fontFamily: {
+          display: ['"Bodoni Moda"', 'Didot', '"Bodoni 72"', 'Georgia', 'serif'],
+          sans: ['"Hanken Grotesk"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root {
+    --ink: #121214;
+    --coal: #1A1A1E;
+    --gold: #D4AF37;
+    --gold-soft: #E5B869;
+    --ivory: #F2EDE0;
+    --smoke: #A19D92;
+    /* Altura do "corte de navalha": a mesma diagonal recorta hero, fotos e faixas */
+    --cut: clamp(16px, 4.2vw, 56px);
+  }
+
+  html { scroll-padding-top: 5.75rem; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body { min-width: 320px; overflow-x: hidden; text-rendering: optimizeLegibility; }
+  ::selection { background: var(--gold); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 3px; border-radius: 6px; }
+
+  /* ---------- Assinatura: corte de navalha ---------- */
+  .cut-b  { clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--cut)), 0 100%); }
+  .cut-t  { clip-path: polygon(0 var(--cut), 100% 0, 100% 100%, 0 100%); }
+  .cut-tb { clip-path: polygon(0 var(--cut), 100% 0, 100% calc(100% - var(--cut)), 0 100%); }
+  .edge   { position: absolute; left: 0; right: 0; height: var(--cut); pointer-events: none; }
+  .edge-b { bottom: 0; background: linear-gradient(to top left, transparent calc(50% + .5px), var(--gold) calc(50% + .5px) calc(50% + 1.5px), transparent calc(50% + 1.5px)); }
+  .edge-t { top: 0;    background: linear-gradient(to top left, transparent calc(50% - 1.5px), var(--gold) calc(50% - 1.5px) calc(50% - .5px), transparent calc(50% - .5px)); }
+  .card-img { --cut: 18px; }
+  .tag-cut { clip-path: polygon(0 0, 100% 0, calc(100% - 9px) 100%, 0 100%); }
+
+  /* ---------- Tipografia ---------- */
+  .foil {
+    background: linear-gradient(100deg, #F3DE9A 0%, #D4AF37 40%, #E5B869 64%, #B98A24 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    padding-right: .06em;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .75rem;
+    font-size: .72rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+  .eyebrow::before { content: ""; width: 1.75rem; height: 1px; background: currentColor; }
+  .h2 { font-size: clamp(2.15rem, 8.6vw, 3.75rem); line-height: 1.04; font-weight: 600; letter-spacing: -.012em; text-wrap: balance; }
+  .lead { color: var(--smoke); font-size: 1.0625rem; line-height: 1.65; }
+
+  /* ---------- Botões ---------- */
+  .btn-gold {
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+    border-radius: 999px; font-weight: 700; letter-spacing: .005em; white-space: nowrap; color: #141210;
+    background: linear-gradient(180deg, #EDCB68 0%, #D4AF37 55%, #C29A2C 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 12px 32px -12px rgba(212,175,55,.6);
+    transition: transform .2s ease, filter .2s ease;
+  }
+  .btn-gold:hover { filter: brightness(1.07); }
+  .btn-gold:active { transform: scale(.98); }
+  .btn-mini {
+    display: inline-flex; align-items: center; gap: .4rem; height: 2.6rem; padding: 0 1rem;
+    border-radius: 999px; font-size: 13px; font-weight: 700; white-space: nowrap;
+    color: var(--gold-soft); border: 1px solid rgba(212,175,55,.55);
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+  }
+  .btn-mini:hover, .btn-mini:active { background: var(--gold); color: #141210; }
+  .btn-mini:active { transform: scale(.97); }
+  .chip {
+    display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .85rem;
+    border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--ivory);
+    background: rgba(18,18,20,.55); border: 1px solid rgba(229,184,105,.28);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  }
+
+  /* ---------- Revelação ao rolar ---------- */
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Movimento (só com preferência padrão) ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-img  { animation: settle 1.8s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-rise { animation: rise .95s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 110ms + 250ms); }
+    .hero-line { animation: draw 1.4s cubic-bezier(.65,0,.2,1) .8s both; }
+    .pulse::before, .wa-float::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; }
+    .pulse::before { animation: pulse-gold 2.6s ease-out infinite; }
+    .wa-float::before { animation: pulse-green 2.8s ease-out infinite; }
+  }
+  @keyframes settle { from { opacity: 0; transform: scale(1.08); } to { opacity: 1; transform: none; } }
+  @keyframes rise   { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes draw   { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes pulse-gold  { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,.5); } 70%, 100% { box-shadow: 0 0 0 16px rgba(212,175,55,0); } }
+  @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); } 70%, 100% { box-shadow: 0 0 0 18px rgba(37,211,102,0); } }
+
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  [data-lucide] { display: inline-block; flex-shrink: 0; }
+  .today { color: var(--gold-soft); }
+</style>
+</head>
+
+<body class="bg-ink font-sans text-ivory antialiased">
+
+<a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:font-bold focus:text-ink">Pular para o conteúdo</a>
+
+<!-- Ícones reutilizáveis (Lucide não tem ícones de marca) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="goldg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F3DE9A"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#A57C1B"/>
+    </linearGradient>
+    <symbol id="i-crown" viewBox="0 0 32 32">
+      <path d="M4 23 2.5 9.5 10 15.5 16 5l6 10.5 7.5-6L28 23z" fill="url(#goldg)"/>
+      <rect x="4.5" y="25.5" width="23" height="2.6" rx="1.1" fill="url(#goldg)"/>
+      <circle cx="2.5" cy="8.2" r="1.7" fill="url(#goldg)"/><circle cx="16" cy="3.7" r="1.8" fill="url(#goldg)"/><circle cx="29.5" cy="8.2" r="1.7" fill="url(#goldg)"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6l2.94 6.02 6.56.92-4.78 4.62 1.16 6.6L12 17.68l-5.88 3.08 1.16-6.6L2.5 9.54l6.56-.92z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+    <symbol id="i-google" viewBox="0 0 24 24">
+      <path fill="#4285F4" d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.46a5.52 5.52 0 0 1-2.4 3.62v3h3.88c2.27-2.09 3.58-5.17 3.58-8.81z"/>
+      <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.94-2.91l-3.88-3A7.16 7.16 0 0 1 5.4 14.33H1.4v3.1A12 12 0 0 0 12 24z"/>
+      <path fill="#FBBC05" d="M5.4 14.33a7.2 7.2 0 0 1 0-4.66v-3.1H1.4a12 12 0 0 0 0 10.86l4-3.1z"/>
+      <path fill="#EA4335" d="M12 4.77c1.76 0 3.34.6 4.58 1.79l3.44-3.44A11.5 11.5 0 0 0 12 0 12 12 0 0 0 1.4 6.57l4 3.1A7.2 7.2 0 0 1 12 4.77z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="fixed inset-x-0 top-0 z-50 px-3 pt-[max(.75rem,env(safe-area-inset-top))] sm:px-5">
+  <div class="mx-auto max-w-6xl overflow-hidden rounded-[22px] border border-gold/20 bg-ink/70 shadow-[0_14px_40px_-14px_rgba(0,0,0,.85)] backdrop-blur-xl">
+    <div class="flex h-[58px] items-center gap-1.5 pl-3 pr-1.5 sm:h-[62px] sm:gap-3 sm:pl-5 sm:pr-2.5">
+
+      <a href="#inicio" class="mr-auto flex items-center gap-2 sm:gap-2.5" aria-label="Barbearia Imperial — ir ao início">
+        <span class="grid h-9 w-9 place-items-center rounded-[10px] border border-gold/40 bg-gradient-to-br from-gold/25 to-transparent">
+          <svg class="h-[19px] w-[19px]" aria-hidden="true"><use href="#i-crown"/></svg>
+        </span>
+        <span class="flex flex-col leading-none">
+          <span class="text-[8px] font-bold uppercase tracking-[.44em] text-gold-soft">Barbearia</span>
+          <span class="mt-[5px] font-display text-[16.5px] font-bold uppercase tracking-[.14em] text-ivory sm:text-[18px]">Imperial</span>
+        </span>
+      </a>
+
+      <nav aria-label="Principal" class="hidden items-center gap-1 lg:flex">
+        <a href="#servicos" class="rounded-full px-3.5 py-2 text-sm font-semibold text-ivory/80 transition hover:text-gold-soft">Serviços</a>
+        <a href="#diferenciais" class="rounded-full px-3.5 py-2 text-sm font-semibold text-ivory/80 transition hover:text-gold-soft">Diferenciais</a>
+        <a href="#avaliacoes" class="rounded-full px-3.5 py-2 text-sm font-semibold text-ivory/80 transition hover:text-gold-soft">Avaliações</a>
+        <a href="#localizacao" class="rounded-full px-3.5 py-2 text-sm font-semibold text-ivory/80 transition hover:text-gold-soft">Localização</a>
+      </nav>
+
+      <a data-wa href="#localizacao" aria-label="Agendar Horário pelo WhatsApp" class="btn-gold h-10 px-3.5 text-[12.5px] sm:h-11 sm:px-5 sm:text-[13.5px]">
+        <span class="min-[390px]:hidden" aria-hidden="true">Agendar</span>
+        <span class="max-[389px]:hidden" aria-hidden="true">Agendar Horário</span>
+      </a>
+
+      <button id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel" aria-label="Abrir menu"
+              class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 text-ivory transition hover:border-gold-soft lg:hidden">
+        <i data-lucide="menu" class="h-5 w-5" id="icoMenu"></i>
+        <i data-lucide="x" class="hidden h-5 w-5" id="icoClose"></i>
+      </button>
+    </div>
+
+    <div id="menuPanel" hidden class="border-t border-white/10 p-2 lg:hidden">
+      <a href="#servicos" class="flex h-12 items-center justify-between rounded-xl px-4 font-semibold hover:bg-white/5">Serviços e valores <i data-lucide="arrow-right" class="h-4 w-4 text-gold"></i></a>
+      <a href="#diferenciais" class="flex h-12 items-center justify-between rounded-xl px-4 font-semibold hover:bg-white/5">Diferenciais <i data-lucide="arrow-right" class="h-4 w-4 text-gold"></i></a>
+      <a href="#avaliacoes" class="flex h-12 items-center justify-between rounded-xl px-4 font-semibold hover:bg-white/5">Avaliações <i data-lucide="arrow-right" class="h-4 w-4 text-gold"></i></a>
+      <a href="#localizacao" class="flex h-12 items-center justify-between rounded-xl px-4 font-semibold hover:bg-white/5">Localização e horários <i data-lucide="arrow-right" class="h-4 w-4 text-gold"></i></a>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ============ HERO ============ -->
+<section id="inicio" aria-labelledby="hero-title"
+         class="cut-b relative isolate flex min-h-[100svh] items-end overflow-hidden pb-[calc(var(--cut)+2.5rem)] pt-32 md:items-center md:pb-[calc(var(--cut)+3rem)]">
+  <img class="hero-img absolute inset-x-0 top-0 -z-20 h-[64%] w-full object-cover object-[50%_30%] [-webkit-mask-image:linear-gradient(to_bottom,#000_58%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_58%,transparent_100%)] md:inset-y-0 md:left-auto md:right-0 md:h-full md:w-[70%] md:object-[50%_22%] md:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_44%)] md:[mask-image:linear-gradient(to_right,transparent_0%,#000_44%)]"
+       src="https://images.unsplash.com/photo-1647140655214-e4a2d914971f?auto=format&amp;fit=crop&amp;q=70&amp;w=1400"
+       srcset="https://images.unsplash.com/photo-1647140655214-e4a2d914971f?auto=format&amp;fit=crop&amp;q=70&amp;w=800 800w,
+               https://images.unsplash.com/photo-1647140655214-e4a2d914971f?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w,
+               https://images.unsplash.com/photo-1647140655214-e4a2d914971f?auto=format&amp;fit=crop&amp;q=70&amp;w=2000 2000w"
+       sizes="(min-width: 768px) 70vw, 100vw" width="1400" height="1750"
+       alt="Barbeiro cortando o cabelo de um cliente com tesoura e pente" fetchpriority="high" decoding="async">
+  <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(18,18,20,1)_0%,rgba(18,18,20,.95)_34%,rgba(18,18,20,.8)_54%,rgba(18,18,20,.58)_72%,rgba(18,18,20,.32)_87%,rgba(18,18,20,.55)_100%)] md:hidden"></div>
+  <div class="absolute inset-0 -z-10 hidden bg-[linear-gradient(to_top,rgba(18,18,20,.95)_0%,rgba(18,18,20,0)_40%)] md:block"></div>
+
+  <div class="relative mx-auto w-full max-w-6xl px-5">
+    <div class="max-w-2xl">
+      <p class="eyebrow hero-rise [text-shadow:0_1px_14px_rgba(0,0,0,.9)]" style="--i:0">Barbearia premium · São Paulo</p>
+
+      <h1 id="hero-title" class="hero-rise mt-5 font-display text-[clamp(2.45rem,10.6vw,4.9rem)] font-semibold leading-[1.02] md:text-[clamp(3.1rem,6.2vw,4.9rem)] tracking-[-.015em] text-balance [text-shadow:0_2px_28px_rgba(0,0,0,.6)]" style="--i:1">
+        Mais que um corte, <em class="foil font-medium italic">uma experiência de respeito.</em>
+      </h1>
+
+      <p class="hero-rise mt-5 max-w-md text-[1.0625rem] leading-relaxed text-ivory/80" style="--i:2">
+        Estilo sempre alinhado, pontualidade no horário marcado e atendimento de primeira, do corte à toalha quente.
+      </p>
+
+      <div class="hero-rise mt-7 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-5" style="--i:3">
+        <a data-wa href="#localizacao" class="btn-gold pulse h-14 px-7 text-[15.5px] sm:px-9">
+          <svg class="h-6 w-6" aria-hidden="true"><use href="#i-wa"/></svg>
+          Agendar pelo WhatsApp
+        </a>
+        <a href="#servicos" class="group/link inline-flex h-11 items-center justify-center gap-2 text-[15px] font-semibold text-ivory/85 transition hover:text-gold-soft">
+          Ver serviços e valores
+          <i data-lucide="arrow-down" class="h-4 w-4 text-gold-soft transition-transform group-hover/link:translate-y-0.5"></i>
+        </a>
+      </div>
+
+      <ul class="hero-rise mt-4 flex flex-wrap gap-2 sm:mt-6" style="--i:4" aria-label="Provas rápidas">
+        <li class="chip">
+          <svg class="h-4 w-4 text-gold" aria-hidden="true"><use href="#i-star"/></svg>
+          <span><b class="font-bold">4.9</b> no Google <span class="text-ivory/60">(+320 avaliações)</span></span>
+        </li>
+        <li class="chip">
+          <i data-lucide="beer" class="h-4 w-4 text-gold"></i>
+          <span>Cerveja gelada cortesia</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="edge edge-b hero-line z-10" aria-hidden="true"></div>
+</section>
+
+<!-- ============ SERVIÇOS ============ -->
+<section id="servicos" aria-labelledby="servicos-title" class="px-5 pb-20 pt-14 sm:pb-28 sm:pt-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal max-w-xl">
+      <p class="eyebrow">Serviços e valores</p>
+      <h2 id="servicos-title" class="h2 mt-4 font-display">Escolha o seu <em class="foil font-medium italic">ritual</em>.</h2>
+      <p class="lead mt-4">Preço combinado antes de sentar na cadeira. Pagamento no Pix, débito, crédito ou dinheiro.</p>
+    </div>
+
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+      <!-- 1 -->
+      <article class="reveal group flex flex-col overflow-hidden rounded-[14px] border border-white/[.07] bg-coal">
+        <div class="card-img cut-b relative aspect-[16/10] overflow-hidden bg-ink sm:aspect-[4/3]">
+          <img src="https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?auto=format&amp;fit=crop&amp;q=72&amp;w=800" width="800" height="600" loading="lazy" decoding="async"
+               alt="Barbeiro finalizando um degradê na nuca de um cliente" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-coal/70 via-transparent to-transparent"></div>
+          <span class="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/75 px-2.5 py-1 text-[11.5px] font-semibold backdrop-blur"><i data-lucide="clock" class="h-3.5 w-3.5 text-gold"></i>45 min</span>
+          <div class="edge edge-b" aria-hidden="true"></div>
+        </div>
+        <div class="flex flex-1 flex-col px-5 pb-5 pt-3">
+          <h3 class="font-display text-[1.6rem] font-semibold leading-[1.1] text-balance">Corte Clássico <span class="text-gold">&amp;</span> Degradê</h3>
+          <p class="mt-2.5 text-[15px] leading-relaxed text-smoke">Tesoura e máquina com transição limpa e acabamento na navalha. Degradê, social ou clássico: sai do jeito que você pediu.</p>
+          <div class="mt-auto flex items-end justify-between gap-3 pt-6">
+            <p class="font-display leading-none"><span class="mr-1 align-[.35em] text-[.95rem] font-semibold text-gold">R$</span><span class="text-[2.2rem] font-semibold">65</span></p>
+            <a data-wa data-service="Corte Clássico & Degradê" href="#localizacao" class="btn-mini">Quero este <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="reveal group flex flex-col overflow-hidden rounded-[14px] border border-white/[.07] bg-coal" style="--d:80ms">
+        <div class="card-img cut-b relative aspect-[16/10] overflow-hidden bg-ink sm:aspect-[4/3]">
+          <img src="https://images.unsplash.com/photo-1533808232502-bee53575c3af?auto=format&amp;fit=crop&amp;q=72&amp;w=800" width="800" height="600" loading="lazy" decoding="async"
+               alt="Cliente relaxando com toalha quente sobre o rosto enquanto o barbeiro trabalha" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-coal/70 via-transparent to-transparent"></div>
+          <span class="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/75 px-2.5 py-1 text-[11.5px] font-semibold backdrop-blur"><i data-lucide="clock" class="h-3.5 w-3.5 text-gold"></i>40 min</span>
+          <div class="edge edge-b" aria-hidden="true"></div>
+        </div>
+        <div class="flex flex-1 flex-col px-5 pb-5 pt-3">
+          <h3 class="font-display text-[1.6rem] font-semibold leading-[1.1] text-balance">Barboterapia com Toalha Quente</h3>
+          <p class="mt-2.5 text-[15px] leading-relaxed text-smoke">Toalha quente para abrir os poros, barba modelada na navalha e hidratação com produtos importados. Relaxa e cuida da pele.</p>
+          <div class="mt-auto flex items-end justify-between gap-3 pt-6">
+            <p class="font-display leading-none"><span class="mr-1 align-[.35em] text-[.95rem] font-semibold text-gold">R$</span><span class="text-[2.2rem] font-semibold">55</span></p>
+            <a data-wa data-service="Barboterapia com Toalha Quente" href="#localizacao" class="btn-mini">Quero este <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 · destaque -->
+      <article class="reveal group flex flex-col overflow-hidden rounded-[14px] border border-gold/60 bg-gradient-to-b from-[#241F10] to-coal shadow-[0_18px_50px_-24px_rgba(212,175,55,.5)]" style="--d:160ms">
+        <div class="card-img cut-b relative aspect-[16/10] overflow-hidden bg-ink sm:aspect-[4/3]">
+          <img src="https://images.unsplash.com/photo-1599011176306-4a96f1516d4d?auto=format&amp;fit=crop&amp;q=72&amp;w=800" width="800" height="600" loading="lazy" decoding="async"
+               alt="Barbeiro aparando a barba de um cliente com tesoura" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-coal/70 via-transparent to-transparent"></div>
+          <span class="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/75 px-2.5 py-1 text-[11.5px] font-semibold backdrop-blur"><i data-lucide="clock" class="h-3.5 w-3.5 text-gold"></i>1h15</span>
+          <span class="tag-cut absolute right-0 top-3 bg-gold py-1 pl-3 pr-5 text-[11px] font-extrabold uppercase tracking-[.14em] text-ink">Mais pedido</span>
+          <div class="edge edge-b" aria-hidden="true"></div>
+        </div>
+        <div class="flex flex-1 flex-col px-5 pb-5 pt-3">
+          <h3 class="font-display text-[1.6rem] font-semibold leading-[1.1] text-balance">Combo Imperial <span class="block text-[1.05rem] font-medium italic text-gold-soft">(Cabelo + Barba)</span></h3>
+          <p class="mt-2.5 text-[15px] leading-relaxed text-smoke">Corte completo e barboterapia no mesmo horário, do degradê à toalha quente. Sai pronto e ainda economiza R$&nbsp;15.</p>
+          <div class="mt-auto flex items-end justify-between gap-3 pt-6">
+            <p class="font-display leading-none">
+              <span class="mb-1 block text-[.85rem] text-smoke line-through decoration-smoke/60">R$ 120</span>
+              <span class="mr-1 align-[.35em] text-[.95rem] font-semibold text-gold">R$</span><span class="text-[2.2rem] font-semibold">105</span>
+            </p>
+            <a data-wa data-service="Combo Imperial (Cabelo + Barba)" href="#localizacao" class="btn-mini">Quero este <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="reveal group flex flex-col overflow-hidden rounded-[14px] border border-white/[.07] bg-coal" style="--d:240ms">
+        <div class="card-img cut-b relative aspect-[16/10] overflow-hidden bg-ink sm:aspect-[4/3]">
+          <img src="https://images.unsplash.com/photo-1647140656316-04db1f605617?auto=format&amp;fit=crop&amp;q=72&amp;w=800" width="800" height="600" loading="lazy" decoding="async"
+               alt="Máquinas de acabamento douradas e navalha sobre bancada preta" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-coal/70 via-transparent to-transparent"></div>
+          <span class="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/75 px-2.5 py-1 text-[11.5px] font-semibold backdrop-blur"><i data-lucide="clock" class="h-3.5 w-3.5 text-gold"></i>20 min</span>
+          <div class="edge edge-b" aria-hidden="true"></div>
+        </div>
+        <div class="flex flex-1 flex-col px-5 pb-5 pt-3">
+          <h3 class="font-display text-[1.6rem] font-semibold leading-[1.1] text-balance">Acabamento <span class="text-gold">&amp;</span> Sobrancelha</h3>
+          <p class="mt-2.5 text-[15px] leading-relaxed text-smoke">Pezinho, contornos e sobrancelha na navalha para manter o corte no ponto entre uma visita e outra.</p>
+          <div class="mt-auto flex items-end justify-between gap-3 pt-6">
+            <p class="font-display leading-none"><span class="mr-1 align-[.35em] text-[.95rem] font-semibold text-gold">R$</span><span class="text-[2.2rem] font-semibold">30</span></p>
+            <a data-wa data-service="Acabamento & Sobrancelha" href="#localizacao" class="btn-mini">Quero este <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIFERENCIAIS ============ -->
+<section id="diferenciais" aria-labelledby="dif-title" class="cut-tb relative bg-coal pb-[calc(4.5rem+var(--cut))] pt-[calc(4rem+var(--cut))] sm:pb-[calc(6rem+var(--cut))]">
+  <div class="edge edge-t" aria-hidden="true"></div>
+  <div class="edge edge-b" aria-hidden="true"></div>
+
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal max-w-2xl">
+      <p class="eyebrow">Diferenciais</p>
+      <h2 id="dif-title" class="h2 mt-4 font-display">Respeito começa <em class="foil font-medium italic">no horário marcado.</em></h2>
+      <p class="lead mt-4">Cada detalhe existe para você ser atendido bem, na hora certa e sem correria.</p>
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-[5fr_7fr] lg:items-stretch lg:gap-10">
+      <div class="reveal relative aspect-[16/11] overflow-hidden rounded-[14px] border border-white/[.07] lg:aspect-auto lg:min-h-[420px]">
+        <img src="https://images.unsplash.com/photo-1781455793310-8427c96454c7?auto=format&amp;fit=crop&amp;q=72&amp;w=1000" width="1000" height="667" loading="lazy" decoding="async"
+             alt="Interior da barbearia com cadeiras de couro e espelhos sob luz âmbar" class="absolute inset-0 h-full w-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+        <p class="absolute inset-x-4 bottom-4 flex items-center gap-2 text-[13px] font-semibold text-ivory">
+          <i data-lucide="snowflake" class="h-4 w-4 text-gold"></i> Ambiente climatizado, com sinuca, café e cerveja
+        </p>
+      </div>
+
+      <ul class="grid gap-4 sm:grid-cols-2">
+        <li class="reveal flex gap-4 rounded-[14px] border border-white/[.07] bg-ink/60 p-5" style="--d:60ms">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold/45 text-gold"><i data-lucide="calendar-check" class="h-6 w-6"></i></span>
+          <div>
+            <h3 class="font-display text-[1.3rem] font-semibold leading-tight">Sem espera</h3>
+            <p class="mt-1.5 text-[15px] leading-relaxed text-smoke">Agendamento pontual: o horário marcado é o horário atendido. Chegou, sentou, cortou.</p>
+          </div>
+        </li>
+        <li class="reveal flex gap-4 rounded-[14px] border border-white/[.07] bg-ink/60 p-5" style="--d:120ms">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold/45 text-gold"><i data-lucide="beer" class="h-6 w-6"></i></span>
+          <div>
+            <h3 class="font-display text-[1.3rem] font-semibold leading-tight">Ambiente climatizado</h3>
+            <p class="mt-1.5 text-[15px] leading-relaxed text-smoke">Ar-condicionado, mesa de sinuca, café fresquinho e cerveja gelada por nossa conta.</p>
+          </div>
+        </li>
+        <li class="reveal flex gap-4 rounded-[14px] border border-white/[.07] bg-ink/60 p-5" style="--d:180ms">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold/45 text-gold"><i data-lucide="gem" class="h-6 w-6"></i></span>
+          <div>
+            <h3 class="font-display text-[1.3rem] font-semibold leading-tight">Produtos importados</h3>
+            <p class="mt-1.5 text-[15px] leading-relaxed text-smoke">Pomadas, óleos e cosméticos de alta linha que valorizam o fio e cuidam da pele.</p>
+          </div>
+        </li>
+        <li class="reveal flex gap-4 rounded-[14px] border border-white/[.07] bg-ink/60 p-5" style="--d:240ms">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold/45 text-gold"><i data-lucide="scan-face" class="h-6 w-6"></i></span>
+          <div>
+            <h3 class="font-display text-[1.3rem] font-semibold leading-tight">Especialistas em visagismo</h3>
+            <p class="mt-1.5 text-[15px] leading-relaxed text-smoke">Analisamos o formato do rosto e o seu estilo para indicar o corte que realmente combina com você.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AVALIAÇÕES ============ -->
+<section id="avaliacoes" aria-labelledby="av-title" class="px-5 pb-20 pt-14 sm:pb-28 sm:pt-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="reveal flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
+      <div class="max-w-xl">
+        <p class="eyebrow">Avaliações no Google</p>
+        <h2 id="av-title" class="h2 mt-4 font-display">Quem senta na cadeira, <em class="foil font-medium italic">volta.</em></h2>
+      </div>
+      <div class="flex items-center gap-4 rounded-2xl border border-white/[.08] bg-coal px-5 py-4 md:shrink-0">
+        <svg class="h-9 w-9" aria-hidden="true"><use href="#i-google"/></svg>
+        <div>
+          <p class="flex items-center gap-2.5">
+            <span class="font-display text-[2.1rem] font-semibold leading-none">4.9</span>
+            <span class="flex text-[#FBBC04]" aria-label="5 de 5 estrelas">
+              <svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg>
+            </span>
+          </p>
+          <p class="mt-1 text-[13px] text-smoke">+320 avaliações no Google Maps</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0" id="reviews">
+
+      <article class="relative flex shrink-0 basis-[86%] snap-start flex-col rounded-[14px] border border-white/[.08] bg-coal p-5 sm:basis-[58%] md:basis-auto">
+        <div class="flex items-start gap-3">
+          <img src="https://images.unsplash.com/photo-1757744705465-ea08b0ddc38a?auto=format&amp;fit=crop&amp;crop=faces&amp;w=112&amp;h=112&amp;q=70" width="44" height="44" loading="lazy" decoding="async"
+               alt="Foto de perfil de Rafael Monteiro" data-avatar="R" class="h-11 w-11 shrink-0 rounded-full bg-ink object-cover ring-1 ring-white/10">
+          <div class="min-w-0 flex-1">
+            <p class="flex items-center gap-1.5 text-[15px] font-semibold leading-tight">Rafael Monteiro <i data-lucide="badge-check" class="h-4 w-4 text-[#8AB4F8]"></i><span class="sr-only">Avaliação verificada</span></p>
+            <p class="mt-0.5 text-xs text-smoke">Local Guide · 31 avaliações</p>
+          </div>
+          <svg class="h-5 w-5 shrink-0" aria-hidden="true"><use href="#i-google"/></svg>
+        </div>
+        <div class="mt-4 flex items-center gap-2">
+          <span class="flex text-[#FBBC04]" aria-label="5 de 5 estrelas"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg></span>
+          <span class="text-xs text-smoke">há 2 semanas</span>
+        </div>
+        <p class="mt-3 text-[15px] leading-relaxed text-ivory/90">Cheguei no horário marcado e já fui atendido, sem esperar um minuto. O degradê ficou impecável, acertaram o estilo de primeira e ainda ganhei uma cerveja gelada. Virou compromisso fixo de toda quinzena.</p>
+        <p class="mt-auto pt-4 text-xs text-smoke"><span class="text-ivory/70">Serviço:</span> Corte Clássico &amp; Degradê</p>
+      </article>
+
+      <article class="relative flex shrink-0 basis-[86%] snap-start flex-col rounded-[14px] border border-white/[.08] bg-coal p-5 sm:basis-[58%] md:basis-auto">
+        <div class="flex items-start gap-3">
+          <img src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&amp;fit=crop&amp;crop=faces&amp;w=112&amp;h=112&amp;q=70" width="44" height="44" loading="lazy" decoding="async"
+               alt="Foto de perfil de Lucas Andrade" data-avatar="L" class="h-11 w-11 shrink-0 rounded-full bg-ink object-cover ring-1 ring-white/10">
+          <div class="min-w-0 flex-1">
+            <p class="flex items-center gap-1.5 text-[15px] font-semibold leading-tight">Lucas Andrade <i data-lucide="badge-check" class="h-4 w-4 text-[#8AB4F8]"></i><span class="sr-only">Avaliação verificada</span></p>
+            <p class="mt-0.5 text-xs text-smoke">Local Guide · 58 avaliações</p>
+          </div>
+          <svg class="h-5 w-5 shrink-0" aria-hidden="true"><use href="#i-google"/></svg>
+        </div>
+        <div class="mt-4 flex items-center gap-2">
+          <span class="flex text-[#FBBC04]" aria-label="5 de 5 estrelas"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg></span>
+          <span class="text-xs text-smoke">há 1 mês</span>
+        </div>
+        <p class="mt-3 text-[15px] leading-relaxed text-ivory/90">A barboterapia com toalha quente é outro nível. Saí relaxado, com a barba desenhada na navalha e a pele ótima. Ambiente climatizado, café fresquinho e até uma sinuca antes do meu horário. Atendimento de primeira.</p>
+        <p class="mt-auto pt-4 text-xs text-smoke"><span class="text-ivory/70">Serviço:</span> Barboterapia com Toalha Quente</p>
+      </article>
+
+      <article class="relative flex shrink-0 basis-[86%] snap-start flex-col rounded-[14px] border border-white/[.08] bg-coal p-5 sm:basis-[58%] md:basis-auto">
+        <div class="flex items-start gap-3">
+          <img src="https://images.unsplash.com/photo-1592234789031-94bf65f630ed?auto=format&amp;fit=crop&amp;crop=faces&amp;w=112&amp;h=112&amp;q=70" width="44" height="44" loading="lazy" decoding="async"
+               alt="Foto de perfil de Thiago Ferreira" data-avatar="T" class="h-11 w-11 shrink-0 rounded-full bg-ink object-cover ring-1 ring-white/10">
+          <div class="min-w-0 flex-1">
+            <p class="flex items-center gap-1.5 text-[15px] font-semibold leading-tight">Thiago Ferreira <i data-lucide="badge-check" class="h-4 w-4 text-[#8AB4F8]"></i><span class="sr-only">Avaliação verificada</span></p>
+            <p class="mt-0.5 text-xs text-smoke">12 avaliações</p>
+          </div>
+          <svg class="h-5 w-5 shrink-0" aria-hidden="true"><use href="#i-google"/></svg>
+        </div>
+        <div class="mt-4 flex items-center gap-2">
+          <span class="flex text-[#FBBC04]" aria-label="5 de 5 estrelas"><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg><svg class="h-4 w-4" aria-hidden="true"><use href="#i-star"/></svg></span>
+          <span class="text-xs text-smoke">há 3 semanas</span>
+        </div>
+        <p class="mt-3 text-[15px] leading-relaxed text-ivory/90">Finalmente uma barbearia que entende de visagismo. Analisaram meu rosto e sugeriram um corte que combinou demais comigo. Pontualidade, produtos importados de qualidade e preço justo. Recomendo de olhos fechados.</p>
+        <p class="mt-auto pt-4 text-xs text-smoke"><span class="text-ivory/70">Serviço:</span> Combo Imperial (Cabelo + Barba)</p>
+      </article>
+
+    </div>
+    <p class="mt-3 flex items-center gap-1.5 text-xs text-smoke md:hidden">Deslize para ver mais <i data-lucide="arrow-right" class="h-3.5 w-3.5 text-gold"></i></p>
+  </div>
+</section>
+
+<!-- ============ LOCALIZAÇÃO E HORÁRIOS ============ -->
+<section id="localizacao" aria-labelledby="loc-title" class="cut-t relative bg-coal pb-20 pt-[calc(4rem+var(--cut))] sm:pb-28">
+  <div class="edge edge-t" aria-hidden="true"></div>
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal max-w-xl">
+      <p class="eyebrow">Localização e horários</p>
+      <h2 id="loc-title" class="h2 mt-4 font-display">Venha nos <em class="foil font-medium italic">conhecer.</em></h2>
+    </div>
+
+    <div class="mt-10 grid gap-5 lg:grid-cols-2">
+
+      <div class="reveal rounded-[14px] border border-white/[.07] bg-ink/60 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <p class="flex items-center gap-2 text-sm font-bold uppercase tracking-[.18em] text-gold-soft"><i data-lucide="clock" class="h-4 w-4"></i> Horário de funcionamento</p>
+          <span id="openPill" class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold">
+            <span id="openDot" class="h-2 w-2 rounded-full bg-smoke"></span><span id="openText">Terça a Sábado · 09h às 20h</span>
+          </span>
+        </div>
+        <p class="mt-6 font-display text-[2rem] font-semibold leading-none sm:text-[2.5rem]">Terça a Sábado</p>
+        <p class="foil mt-2 font-display text-[2rem] font-semibold italic leading-none sm:text-[2.5rem]">09h às 20h</p>
+
+        <ul id="hoursList" class="mt-7 divide-y divide-white/10 text-[15px]">
+          <li data-day="2" class="flex items-center justify-between py-3"><span>Terça</span><span>09h às 20h</span></li>
+          <li data-day="3" class="flex items-center justify-between py-3"><span>Quarta</span><span>09h às 20h</span></li>
+          <li data-day="4" class="flex items-center justify-between py-3"><span>Quinta</span><span>09h às 20h</span></li>
+          <li data-day="5" class="flex items-center justify-between py-3"><span>Sexta</span><span>09h às 20h</span></li>
+          <li data-day="6" class="flex items-center justify-between py-3"><span>Sábado</span><span>09h às 20h</span></li>
+          <li data-day="0" class="flex items-center justify-between py-3 text-smoke"><span>Domingo</span><span>Fechado</span></li>
+          <li data-day="1" class="flex items-center justify-between py-3 text-smoke"><span>Segunda</span><span>Fechado</span></li>
+        </ul>
+      </div>
+
+      <div class="reveal overflow-hidden rounded-[14px] border border-white/[.07] bg-ink/60" style="--d:100ms">
+        <div class="card-img cut-b relative aspect-[16/9] overflow-hidden bg-ink">
+          <img src="https://images.unsplash.com/photo-1576168056582-0a851a87ab8e?auto=format&amp;fit=crop&amp;q=72&amp;w=1000" width="1000" height="667" loading="lazy" decoding="async"
+               alt="Cadeiras de barbeiro de couro marrom na Barbearia Imperial" class="h-full w-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent"></div>
+          <div class="edge edge-b" aria-hidden="true"></div>
+        </div>
+        <div class="p-6 pt-4 sm:p-8 sm:pt-5">
+          <p class="flex items-center gap-2 text-sm font-bold uppercase tracking-[.18em] text-gold-soft"><i data-lucide="map-pin" class="h-4 w-4"></i> Endereço</p>
+          <address class="mt-4 not-italic">
+            <span class="block font-display text-[1.5rem] font-semibold leading-snug text-balance sm:text-[1.7rem]">Rua dos Imperadores,&nbsp;128</span>
+            <span class="mt-1 block text-[1.02rem] text-ivory/80">Centro · São Paulo – SP</span>
+            <span class="block text-[.95rem] text-smoke">CEP 01010-000</span>
+          </address>
+          <ul class="mt-5 space-y-2.5 text-[15px] text-smoke">
+            <li class="flex items-center gap-2.5"><i data-lucide="car" class="h-4 w-4 text-gold"></i> Estacionamento com manobrista para clientes</li>
+            <li class="flex items-center gap-2.5"><i data-lucide="wifi" class="h-4 w-4 text-gold"></i> Wi-Fi grátis enquanto você espera o café</li>
+            <li class="flex items-center gap-2.5"><i data-lucide="credit-card" class="h-4 w-4 text-gold"></i> Pix, débito, crédito e dinheiro</li>
+          </ul>
+          <a id="mapsLink" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20dos%20Imperadores%2C%20128%20-%20Centro%2C%20S%C3%A3o%20Paulo%20-%20SP" target="_blank" rel="noopener noreferrer"
+             class="btn-gold mt-7 h-14 w-full px-7 text-[15.5px] sm:w-auto">
+            <i data-lucide="navigation" class="h-5 w-5"></i> Como Chegar (Google Maps)
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section aria-labelledby="cta-title" class="px-5 py-24 text-center sm:py-32">
+  <div class="reveal mx-auto max-w-3xl">
+    <svg class="mx-auto h-9 w-9" aria-hidden="true"><use href="#i-crown"/></svg>
+    <h2 id="cta-title" class="h2 mt-6 font-display text-[clamp(2.3rem,9vw,4.4rem)]">Sua cadeira <em class="foil font-medium italic">já está separada.</em></h2>
+    <p class="lead mx-auto mt-4 max-w-md">Escolha o dia e o horário pelo WhatsApp. Respondemos em poucos minutos e confirmamos na hora.</p>
+    <a data-wa href="#localizacao" class="btn-gold pulse mt-9 h-14 px-8 text-[15.5px]">
+      <svg class="h-6 w-6" aria-hidden="true"><use href="#i-wa"/></svg> Agendar pelo WhatsApp
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-white/10 px-5 pb-28 pt-10 text-sm text-smoke">
+  <div class="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
+    <a href="#inicio" class="flex items-center gap-2.5" aria-label="Barbearia Imperial — voltar ao topo">
+      <span class="grid h-9 w-9 place-items-center rounded-[10px] border border-gold/40 bg-gradient-to-br from-gold/25 to-transparent"><svg class="h-[19px] w-[19px]" aria-hidden="true"><use href="#i-crown"/></svg></span>
+      <span class="flex flex-col leading-none">
+        <span class="text-[8px] font-bold uppercase tracking-[.44em] text-gold-soft">Barbearia</span>
+        <span class="mt-[5px] font-display text-[18px] font-bold uppercase tracking-[.14em] text-ivory">Imperial</span>
+      </span>
+    </a>
+    <nav aria-label="Rodapé" class="flex flex-wrap gap-x-6 gap-y-2 font-semibold text-ivory/80">
+      <a href="#servicos" class="hover:text-gold-soft">Serviços</a>
+      <a href="#diferenciais" class="hover:text-gold-soft">Diferenciais</a>
+      <a href="#avaliacoes" class="hover:text-gold-soft">Avaliações</a>
+      <a href="#localizacao" class="hover:text-gold-soft">Localização</a>
+    </nav>
+    <p>Terça a Sábado · 09h às 20h</p>
+  </div>
+  <div class="mx-auto mt-8 flex max-w-6xl flex-col gap-1 border-t border-white/5 pt-6 text-xs text-smoke/80 sm:flex-row sm:justify-between">
+    <p>© <span id="year">2026</span> Barbearia Imperial. Todos os direitos reservados.</p>
+    <p>Modelo de demonstração, conteúdo fictício · Fotos: Unsplash</p>
+  </div>
+</footer>
+
+<!-- ============ ETIQUETA DE DEMONSTRAÇÃO (remova este bloco e o JS #demoTag na versão final) ============ -->
+<div id="demoTag" class="fixed left-4 z-40 flex items-center gap-1 rounded-full border border-gold/30 bg-ink/85 py-1 pl-3.5 pr-1 text-[11.5px] font-semibold text-ivory/85 shadow-[0_8px_24px_-8px_rgba(0,0,0,.8)] backdrop-blur-md"
+     style="bottom:calc(1.7rem + env(safe-area-inset-bottom))">
+  <span>Modelo de demonstração</span>
+  <button type="button" id="demoClose" aria-label="Fechar aviso de demonstração" class="grid h-7 w-7 place-items-center rounded-full text-ivory/70 transition hover:bg-white/10 hover:text-ivory">
+    <i data-lucide="x" class="h-3.5 w-3.5"></i>
+  </button>
+</div>
+
+<!-- ============ WHATSAPP FLUTUANTE ============ -->
+<a id="waFloat" data-wa href="#localizacao" aria-label="Chamar no WhatsApp"
+   class="wa-float fixed right-4 z-50 grid h-[60px] w-[60px] place-items-center rounded-full bg-[#25D366] text-white shadow-[0_12px_30px_-8px_rgba(37,211,102,.6)] transition-transform hover:scale-105 active:scale-95 sm:right-6"
+   style="bottom:calc(1rem + env(safe-area-inset-bottom))">
+  <svg class="h-8 w-8" aria-hidden="true"><use href="#i-wa"/></svg>
+</a>
+
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script>
+(() => {
+  /* ===== Configuração: troque pelo número real (DDI + DDD + número, só dígitos) ===== */
+  const WHATSAPP = '5511999999999';
+  const MSG_PADRAO = 'Olá! Vim pelo site da Barbearia Imperial e gostaria de agendar um horário.';
+
+  const waLink = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
+  document.querySelectorAll('[data-wa]').forEach((a) => {
+    const servico = a.dataset.service;
+    a.href = waLink(servico ? `Olá! Vim pelo site da Barbearia Imperial e quero agendar: ${servico}.` : MSG_PADRAO);
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+  });
+
+  if (window.lucide) lucide.createIcons();
+
+  /* ===== Menu mobile ===== */
+  const btn = document.getElementById('menuBtn');
+  const panel = document.getElementById('menuPanel');
+  const icoMenu = document.getElementById('icoMenu');
+  const icoClose = document.getElementById('icoClose');
+  const setMenu = (open) => {
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    icoMenu.classList.toggle('hidden', open);
+    icoClose.classList.toggle('hidden', !open);
+  };
+  btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  panel.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+
+  /* ===== Revelação ao rolar ===== */
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+
+  /* ===== Avatar: se a foto falhar, mostra a inicial ===== */
+  document.querySelectorAll('img[data-avatar]').forEach((img) => {
+    const fallback = () => {
+      const s = document.createElement('span');
+      s.className = 'grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold/20 font-display text-lg font-bold text-gold-soft ring-1 ring-gold/30';
+      s.textContent = img.dataset.avatar;
+      s.setAttribute('aria-hidden', 'true');
+      img.replaceWith(s);
+    };
+    img.addEventListener('error', fallback, { once: true });
+    if (img.complete && img.naturalWidth === 0 && img.src) fallback();
+  });
+
+  /* ===== Aberto agora? (horário de Brasília) ===== */
+  const ABRE = 9 * 60, FECHA = 20 * 60, DIAS_ABERTO = [2, 3, 4, 5, 6];
+  const NOMES = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  const agoraSP = () => {
+    const p = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Sao_Paulo', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+    }).formatToParts(new Date());
+    const v = (t) => p.find((x) => x.type === t).value;
+    return { dia: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(v('weekday')), min: +v('hour') * 60 + +v('minute') };
+  };
+  const pintarStatus = () => {
+    const { dia, min } = agoraSP();
+    const diaAberto = DIAS_ABERTO.includes(dia);
+    const aberto = diaAberto && min >= ABRE && min < FECHA;
+    let texto;
+    if (aberto) texto = 'Aberto agora · fecha às 20h';
+    else if (diaAberto && min < ABRE) texto = 'Fechado agora · abre hoje às 09h';
+    else {
+      let d = 1;
+      while (!DIAS_ABERTO.includes((dia + d) % 7)) d++;
+      texto = `Fechado agora · abre ${d === 1 ? 'amanhã' : NOMES[(dia + d) % 7]} às 09h`;
+    }
+    document.getElementById('openText').textContent = texto;
+    document.getElementById('openDot').className = 'h-2 w-2 rounded-full ' + (aberto ? 'bg-emerald-400' : 'bg-rose-400');
+    document.querySelectorAll('#hoursList li').forEach((li) => {
+      const hoje = Number(li.dataset.day) === dia;
+      li.classList.toggle('today', hoje);
+      li.classList.toggle('font-semibold', hoje);
+    });
+  };
+  pintarStatus();
+  setInterval(pintarStatus, 60000);
+
+  document.getElementById('demoClose').addEventListener('click', () => document.getElementById('demoTag').remove());
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
